@@ -1,0 +1,125 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Рэп-каталог",
+  "actionToggleTheme": "Переключить тему",
+  "actionSwitchLanguage": "Сменить язык",
+  "languageShort": "EN",
+  "listCount": "Записей в каталоге: {count}",
+  "@listCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listFound": "Найдено: {count}",
+  "@listFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listEmpty": "Ничего не найдено",
+  "searchHint": "Поиск по имени исполнителя",
+  "actionClearSearch": "Очистить поиск",
+  "detailNotFound": "Такой записи в каталоге нет",
+  "artistTypePerson": "Исполнитель",
+  "artistTypeGroup": "Группа",
+  "artistTypeOther": "Другое",
+  "labelCountry": "Страна: {country}",
+  "@labelCountry": {
+    "placeholders": {
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "labelOrigin": "Откуда: {city}, {area}",
+  "@labelOrigin": {
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "labelBorn": "Родился: {date}",
+  "@labelBorn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "labelLifespan": "Годы жизни: {begin} — {end}",
+  "@labelLifespan": {
+    "placeholders": {
+      "begin": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "labelGroupSince": "Собрались в {date}",
+  "@labelGroupSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "labelGroupRange": "Существовала: {begin} — {end}",
+  "@labelGroupRange": {
+    "placeholders": {
+      "begin": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionAbout": "Об исполнителе",
+  "sectionAliases": "Псевдонимы",
+  "sectionTags": "Теги",
+  "sectionReleases": "Релизы",
+  "sectionRelated": "Связанные артисты",
+  "aliasPrimary": "{alias} · основной",
+  "@aliasPrimary": {
+    "placeholders": {
+      "alias": {
+        "type": "String"
+      }
+    }
+  },
+  "genreHipHop": "Хип-хоп",
+  "genreRap": "Рэп",
+  "genrePopRap": "Поп-рэп",
+  "genreEastCoast": "Восточное побережье",
+  "genreWestCoast": "Западное побережье",
+  "genreSouthern": "Южный хип-хоп",
+  "genreGangstaRap": "Гангста-рэп",
+  "genreGFunk": "Джи-фанк",
+  "genreConscious": "Осознанный хип-хоп",
+  "genrePolitical": "Политический хип-хоп",
+  "genreHardcore": "Хардкор-хип-хоп",
+  "genreBoomBap": "Бум-бэп",
+  "genreJazzRap": "Джаз-рэп",
+  "genreInstrumental": "Инструментальный хип-хоп",
+  "genreExperimental": "Экспериментальный хип-хоп",
+  "genreAlternative": "Альтернативный хип-хоп",
+  "genreUnderground": "Андеграунд",
+  "genreOldSchool": "Старая школа",
+  "genreRapRock": "Рэп-рок",
+  "genreTrap": "Трэп",
+  "genreCrunk": "Кранк",
+  "genreEmoRap": "Эмо-рэп",
+  "genreCloudRap": "Клауд-рэп",
+  "genreTrapMetal": "Трэп-метал",
+  "genreRage": "Рейдж"
+}
