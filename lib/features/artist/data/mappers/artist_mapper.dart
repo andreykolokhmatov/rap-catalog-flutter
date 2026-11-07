@@ -117,7 +117,11 @@ extension ArtistDtoMapper on ArtistDto {
       for (final alias in aliases)
         // «Search hint» — опечатки и транслитерации для поиска, не псевдонимы.
         if (alias.type != 'Search hint' && seen.add(alias.name.toLowerCase()))
-          AliasModel(name: alias.name, primary: alias.primary ?? false),
+          AliasModel(
+            name: alias.name,
+            primary: alias.primary ?? false,
+            locale: alias.locale ?? '',
+          ),
     ].take(_maxAliases).toList();
   }
 

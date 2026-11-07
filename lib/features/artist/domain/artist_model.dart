@@ -93,13 +93,23 @@ class TagModel extends Equatable {
 }
 
 class AliasModel extends Equatable {
-  const AliasModel({required this.name, required this.primary});
+  const AliasModel({
+    required this.name,
+    required this.primary,
+    this.locale = '',
+  });
 
   final String name;
+
+  /// «Основной» в MusicBrainz — основной для своего языка [locale],
+  /// а не вообще: у Eminem основные и `Eminem` (en), и `エミネム` (ja).
   final bool primary;
 
+  /// Код языка псевдонима: `en`, `ja`, `en_US`. Пусто — язык не указан.
+  final String locale;
+
   @override
-  List<Object?> get props => [name, primary];
+  List<Object?> get props => [name, primary, locale];
 }
 
 class ReleaseGroupModel extends Equatable {

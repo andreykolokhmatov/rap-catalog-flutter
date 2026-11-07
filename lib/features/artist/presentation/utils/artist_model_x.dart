@@ -51,6 +51,14 @@ extension ReleaseGroupModelX on ReleaseGroupModel {
 }
 
 extension AliasModelX on AliasModel {
+  /// Отметка «основной» — только у основного псевдонима для языка интерфейса.
   String label(AppLocalizations l10n) =>
-      primary ? l10n.aliasPrimary(name) : name;
+      isPrimaryFor(l10n.localeName) ? l10n.aliasPrimary(name) : name;
+
+  /// `en_US` и `en` — один язык: сравниваются коды до подчёркивания.
+  bool isPrimaryFor(String languageCode) =>
+      primary && _language(locale) == _language(languageCode);
+
+  static String _language(String locale) =>
+      locale.split(RegExp('[_-]')).first.toLowerCase();
 }
