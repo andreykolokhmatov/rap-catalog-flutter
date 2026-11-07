@@ -1,4 +1,4 @@
-# Рэп-каталог — каркас на Flutter
+# Рэп-каталог на Flutter
 
 Тот же каталог хип-хоп исполнителей, что в ЛР1 на Compose Multiplatform, на Flutter.
 ЛР2 — каркас на моках, ЛР3 — данные из сети.
@@ -32,8 +32,7 @@ MusicBrainz пускает не чаще запроса в секунду, ин�
 запросов. На 503 экран показывает «слишком много запросов» и «Повторить».
 
 Жанры — теги MusicBrainz, которые совпадают с жанрами каталога (`Genre`), по убыванию голосов.
-Фото: у 33 исполнителей из ЛР2 — локальные снимки, у остальных — миниатюра с Викисклада
-по фото из Викиданных. Адрес миниатюры собирается из MD5 имени файла: `Special:FilePath`
+Фото у всех исполнителей — миниатюра с Викисклада по фото из Викиданных. Адрес миниатюры собирается из MD5 имени файла: `Special:FilePath`
 отвечает редиректами без CORS, и в браузере картинка не загрузилась бы. Нет фото
 в Викиданных — буквенная плитка. Справка и фото — дополнения с других серверов:
 их сбой не роняет экран, сбой MusicBrainz — роняет.
@@ -43,10 +42,10 @@ MusicBrainz пускает не чаще запроса в секунду, ин�
 | Путь | Что это |
 |---|---|
 | `lib/main.dart`, `lib/app.dart` | вход, корень: `Dio` → API → датасорс → `RepositoryProvider` по интерфейсу, `MultiBlocProvider`, `MaterialApp.router` |
-| `common/network/` | `DioClient` (базовый адрес, таймауты, очередь к MusicBrainz, `LogInterceptor` в debug), `sealed LoadException` |
-| `common/navigation/` | `go_router`: `/` — список, `/artist/:id` — деталь (вложена в список, поэтому глубокая ссылка тоже возвращает в список) |
+| `common/network/` | `DioClient` (базовый адрес, таймауты, очередь к MusicBrainz, `LogInterceptor` в debug), `sealed LoadException` (нет связи, ошибка сервера, непонятный ответ, нет записи) |
+| `common/navigation/` | `go_router`: `/` — список, `/artist/:id` — деталь (вложена в список, поэтому глубокая ссылка тоже возвращает в список), неизвестный адрес — `NotFoundScreen` с переходом на список |
 | `common/settings/` | `SettingsCubit`: тема и язык, одно состояние с `copyWith`, живёт в памяти сессии |
-| `common/theme/` | `AppColors` (палитры и цвета жанров), `ImageSources` (MBID → снимок), `AppTheme` |
+| `common/theme/` | `AppColors` (палитры и цвета жанров), `AppTheme` |
 | `common/widgets/` | шапка с переключателями, рамка ширины, секция, сообщение, ошибка с «Повторить» |
 | `features/artist/domain/` | `ArtistModel` и вложенные модели, `ArtistPage`, `IArtistRepository` |
 | `features/artist/data/api/` | `ArtistApi` (MusicBrainz), `WikiApi` (Викиданные, Википедия): метод на адрес, возвращают DTO |
@@ -58,7 +57,6 @@ MusicBrainz пускает не чаще запроса в секунду, ин�
 | `features/artist/presentation/view/` | экраны и их виджеты |
 | `features/artist/presentation/utils/` | расширения для показа: подписи жанров, факты, год релиза, текст ошибки |
 | `lib/l10n/` | ARB на русском и английском |
-| `assets/images/artists/` | 33 фото с Викисклада, авторы в `docs/CREDITS.md` |
 | `tool/check_arb.dart` | сверяет ключи и параметры во всех ARB |
 
 ## Правила
