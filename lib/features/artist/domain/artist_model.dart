@@ -47,9 +47,10 @@ class ArtistModel extends Equatable {
     required this.tags,
     required this.aliases,
     required this.releaseGroups,
-    required this.relatedArtistIds,
+    required this.related,
     required this.biography,
     required this.biographyRu,
+    this.photoUrl = '',
   });
 
   final String id;
@@ -67,9 +68,15 @@ class ArtistModel extends Equatable {
   final List<TagModel> tags;
   final List<AliasModel> aliases;
   final List<ReleaseGroupModel> releaseGroups;
-  final List<String> relatedArtistIds;
+
+  /// Участники, группы и коллабы. Это краткие записи: только id, имя, тип и уточнение,
+  /// полная карточка грузится при переходе на деталь.
+  final List<ArtistModel> related;
   final String biography;
   final String biographyRu;
+
+  /// Фото из сети; пустая строка — фото нет.
+  final String photoUrl;
 
   @override
   List<Object?> get props => [id];
