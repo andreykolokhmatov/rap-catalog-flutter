@@ -5,7 +5,8 @@ import '../../../../../common/theme/image_sources.dart';
 import '../../../domain/artist_model.dart';
 import '../../utils/artist_model_x.dart';
 
-/// Снимок исполнителя, а без снимка — первая буква на градиенте цветов жанров.
+/// Снимок исполнителя: из ассетов, иначе из сети (Викисклад), иначе первая буква
+/// на градиенте цветов жанров.
 class ArtistArtwork extends StatelessWidget {
   const ArtistArtwork({
     super.key,
@@ -18,17 +19,28 @@ class ArtistArtwork extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final photo = ImageSources.artistPhoto(artist.id);
+    // Свой снимок из ассетов (с указанием автора) важнее снимка из сети.
+    final asset = ImageSources.artistPhoto(artist.id);
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
-      child: photo != null
-          ? Image.asset(
-              photo,
-              fit: BoxFit.cover,
-              semanticLabel: artist.name,
-              errorBuilder: (context, error, stackTrace) => _Fallback(artist),
-            )
-          : _Fallback(artist),
+      child: switch ((asset, artist.photoUrl)) {
+        (final String path, _) => Image.asset(
+          path,
+          fit: BoxFit.cover,
+          semanticLabel: artist.name,
+          errorBuilder: (context, error, stackTrace) => _Fallback(artist),
+        ),
+        (null, final url) when url.isNotEmpty => Image.network(
+          url,
+          fit: BoxFit.cover,
+          semanticLabel: artist.name,
+          // Пока снимок грузится, видна буквенная плитка.
+          frameBuilder: (context, child, frame, wasSynchronouslyLoaded) =>
+              frame == null ? _Fallback(artist) : child,
+          errorBuilder: (context, error, stackTrace) => _Fallback(artist),
+        ),
+        _ => _Fallback(artist),
+      },
     );
   }
 }

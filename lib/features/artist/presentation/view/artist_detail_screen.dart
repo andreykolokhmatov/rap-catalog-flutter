@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../common/navigation/app_routes.dart';
 import '../../../../common/widgets/catalog_app_bar.dart';
 import '../../../../common/widgets/content_frame.dart';
+import '../../../../common/widgets/error_view.dart';
 import '../../../../common/widgets/message_view.dart';
 import '../../../../common/widgets/section.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -13,6 +14,7 @@ import '../../domain/i_artist_repository.dart';
 import '../bloc/detail/artist_detail_cubit.dart';
 import '../bloc/detail/artist_detail_state.dart';
 import '../utils/artist_model_x.dart';
+import '../utils/load_exception_x.dart';
 import 'widgets/alias_pill.dart';
 import 'widgets/artist_header.dart';
 import 'widgets/related_artist_tile.dart';
@@ -39,6 +41,12 @@ class ArtistDetailScreen extends StatelessWidget {
             ArtistDetailNotFound() => Center(
               child: MessageView(
                 text: AppLocalizations.of(context).detailNotFound,
+              ),
+            ),
+            ArtistDetailError(:final error) => Center(
+              child: ErrorView(
+                text: error.message(AppLocalizations.of(context)),
+                onRetry: () => context.read<ArtistDetailCubit>().load(artistId),
               ),
             ),
             ArtistDetailLoaded(:final artist, :final related) =>

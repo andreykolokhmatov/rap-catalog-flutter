@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../../common/network/load_exception.dart';
 import '../../../domain/artist_model.dart';
 
 sealed class ArtistDetailState extends Equatable {
@@ -25,4 +26,13 @@ final class ArtistDetailLoaded extends ArtistDetailState {
 
 final class ArtistDetailNotFound extends ArtistDetailState {
   const ArtistDetailNotFound();
+}
+
+final class ArtistDetailError extends ArtistDetailState {
+  const ArtistDetailError(this.error);
+
+  final LoadException error;
+
+  @override
+  List<Object?> get props => [error];
 }

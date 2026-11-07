@@ -16,8 +16,9 @@ extension ArtistModelX on ArtistModel {
 
   /// Строки «Страна / Откуда / Годы» для шапки детали.
   List<String> facts(AppLocalizations l10n) => [
-    l10n.labelCountry(country),
-    if (beginArea.isNotEmpty) l10n.labelOrigin(beginArea, area),
+    if (country.isNotEmpty) l10n.labelCountry(country),
+    if (beginArea.isNotEmpty && area.isNotEmpty)
+      l10n.labelOrigin(beginArea, area),
     if (lifeSpanBegin.isNotEmpty)
       switch ((type == ArtistType.group, ended)) {
         (true, true) => l10n.labelGroupRange(lifeSpanBegin, lifeSpanEnd),
