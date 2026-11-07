@@ -16,8 +16,9 @@ extension ArtistModelX on ArtistModel {
 
   /// Строки «Страна / Откуда / Годы» для шапки детали.
   List<String> facts(AppLocalizations l10n) => [
-    l10n.labelCountry(country),
-    if (beginArea.isNotEmpty) l10n.labelOrigin(beginArea, area),
+    if (country.isNotEmpty) l10n.labelCountry(country),
+    if (beginArea.isNotEmpty && area.isNotEmpty)
+      l10n.labelOrigin(beginArea, area),
     if (lifeSpanBegin.isNotEmpty)
       switch ((type == ArtistType.group, ended)) {
         (true, true) => l10n.labelGroupRange(lifeSpanBegin, lifeSpanEnd),
@@ -50,6 +51,14 @@ extension ReleaseGroupModelX on ReleaseGroupModel {
 }
 
 extension AliasModelX on AliasModel {
+  /// Отметка «основной» — только у основного псевдонима для языка интерфейса.
   String label(AppLocalizations l10n) =>
-      primary ? l10n.aliasPrimary(name) : name;
+      isPrimaryFor(l10n.localeName) ? l10n.aliasPrimary(name) : name;
+
+  /// `en_US` и `en` — один язык: сравниваются коды до подчёркивания.
+  bool isPrimaryFor(String languageCode) =>
+      primary && _language(locale) == _language(languageCode);
+
+  static String _language(String locale) =>
+      locale.split(RegExp('[_-]')).first.toLowerCase();
 }

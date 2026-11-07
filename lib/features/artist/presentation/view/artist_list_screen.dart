@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/widgets/catalog_app_bar.dart';
 import '../../../../common/widgets/content_frame.dart';
+import '../../../../common/widgets/error_view.dart';
 import '../../../../common/widgets/message_view.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../bloc/list/artist_list_cubit.dart';
 import '../bloc/list/artist_list_state.dart';
+import '../utils/load_exception_x.dart';
 import 'widgets/artist_grid.dart';
 import 'widgets/artist_search_field.dart';
 
@@ -24,11 +26,7 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
   void initState() {
     super.initState();
     // Cubit списка живёт в корне, поэтому поле восстанавливаем из его состояния.
-    final query = switch (context.read<ArtistListCubit>().state) {
-      ArtistListLoaded(:final query) ||
-      ArtistListNotFound(:final query) => query,
-      ArtistListLoading() => '',
-    };
+    final query = context.read<ArtistListCubit>().state.query;
     _searchController = TextEditingController(text: query);
   }
 
@@ -66,6 +64,12 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
                   ),
                   ArtistListNotFound() => MessageView(
                     text: AppLocalizations.of(context).listEmpty,
+                  ),
+                  ArtistListError(:final error) => Center(
+                    child: ErrorView(
+                      text: error.message(AppLocalizations.of(context)),
+                      onRetry: context.read<ArtistListCubit>().retry,
+                    ),
                   ),
                   ArtistListLoaded() => ArtistGrid(state: state),
                 },
