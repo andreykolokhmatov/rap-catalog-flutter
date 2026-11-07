@@ -92,7 +92,7 @@ class ArtistGrid extends StatelessWidget {
                   NextPageStatus.error => Center(
                     child: ErrorView(
                       text: l10n.listNextPageFailed,
-                      onRetry: cubit.loadMore,
+                      onRetry: cubit.retryNextPage,
                     ),
                   ),
                 },

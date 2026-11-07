@@ -29,11 +29,14 @@ class ArtistListCubit extends Cubit<ArtistListState> {
     _searchTimer = Timer(_searchDelay, () => _loadFirstPage(query));
   }
 
+  /// Догрузка при прокрутке. После ошибки не повторяет сама: иначе каждое
+  /// движение у конца списка слало бы новый запрос, в том числе на 503.
+  /// Повтор — только кнопкой, через [retryNextPage].
   Future<void> loadMore() async {
     final current = state;
     if (current is! ArtistListLoaded ||
         !current.hasMore ||
-        current.nextPage == NextPageStatus.loading) {
+        current.nextPage != NextPageStatus.idle) {
       return;
     }
     emit(current.copyWith(nextPage: NextPageStatus.loading));
@@ -60,6 +63,17 @@ class ArtistListCubit extends Cubit<ArtistListState> {
       if (isClosed || current.query != _query) return;
       emit(current.copyWith(nextPage: NextPageStatus.error));
     }
+  }
+
+  /// Кнопка «Повторить» под списком: снимает ошибку догрузки и пробует снова.
+  Future<void> retryNextPage() async {
+    final current = state;
+    if (current is! ArtistListLoaded ||
+        current.nextPage != NextPageStatus.error) {
+      return;
+    }
+    emit(current.copyWith(nextPage: NextPageStatus.idle));
+    await loadMore();
   }
 
   Future<void> _loadFirstPage(String query) async {
