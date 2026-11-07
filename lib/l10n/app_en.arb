@@ -54,5 +54,8 @@
   "errorConnection": "Couldn't reach the server. Check your network connection",
   "errorServer": "The server returned an error. Please try again",
   "errorRateLimit": "The server is asking to slow down: too many requests. Try again in a couple of seconds",
-  "listNextPageFailed": "Couldn't load the next page"
+  "listNextPageFailed": "Couldn't load the next page",
+  "errorBadResponse": "The server sent data in an unexpected format. Please try again",
+  "routeNotFound": "There's no such page",
+  "actionToList": "Back to artists"
 }

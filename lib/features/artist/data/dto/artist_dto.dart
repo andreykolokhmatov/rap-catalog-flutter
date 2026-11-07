@@ -90,7 +90,7 @@ class TagDto {
 
 @JsonSerializable(createToJson: false)
 class AliasDto {
-  const AliasDto({required this.name, this.type, this.primary});
+  const AliasDto({required this.name, this.type, this.primary, this.locale});
 
   factory AliasDto.fromJson(Map<String, dynamic> json) =>
       _$AliasDtoFromJson(json);
@@ -98,6 +98,9 @@ class AliasDto {
   final String name;
   final String? type;
   final bool? primary;
+
+  /// Язык, для которого псевдоним основной: `en`, `ja`, `en_US`.
+  final String? locale;
 }
 
 @JsonSerializable(fieldRename: FieldRename.kebab, createToJson: false)

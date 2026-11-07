@@ -21,6 +21,15 @@ final class ServerLoadException extends LoadException {
   String toString() => 'ServerLoadException($statusCode)';
 }
 
+/// Сервер ответил успешно, но тело не разобрать: пустое, не JSON,
+/// нет обязательного поля или поле другого типа.
+final class BadResponseLoadException extends LoadException {
+  const BadResponseLoadException();
+
+  @override
+  String toString() => 'BadResponseLoadException';
+}
+
 /// Запрошенной записи на сервере нет.
 final class NotFoundLoadException extends LoadException {
   const NotFoundLoadException();

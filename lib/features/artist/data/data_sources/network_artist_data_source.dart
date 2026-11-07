@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../common/network/load_exception.dart';
 import '../api/artist_api.dart';
@@ -80,6 +81,18 @@ class NetworkArtistDataSource implements IArtistDataSource {
       return await request();
     } on DioException catch (e) {
       throw _toLoadException(e, notFoundCodes);
+    } on CheckedFromJsonException {
+      // Поле не того типа или нет обязательного: так падает fromJson с `checked: true`.
+      throw const BadResponseLoadException();
+    } on FormatException {
+      throw const BadResponseLoadException();
+    }
+    // Пустое тело (`response.data!`) и приведение типов вне fromJson бросают
+    // TypeError. Без этой ветки он прошёл бы мимо LoadException, и Cubit
+    // остался бы на индикаторе.
+    // ignore: avoid_catching_errors
+    on TypeError {
+      throw const BadResponseLoadException();
     }
   }
 
@@ -87,6 +100,10 @@ class NetworkArtistDataSource implements IArtistDataSource {
     DioException e,
     Set<int> notFoundCodes,
   ) {
+    // Ответ пришёл, но dio не смог его разобрать (например, не JSON).
+    if (e.error is FormatException || e.error is TypeError) {
+      return const BadResponseLoadException();
+    }
     final status = e.response?.statusCode;
     return switch (e.type) {
       DioExceptionType.badResponse when notFoundCodes.contains(status) =>

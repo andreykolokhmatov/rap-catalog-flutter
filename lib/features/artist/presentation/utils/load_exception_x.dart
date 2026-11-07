@@ -5,6 +5,7 @@ extension LoadExceptionX on LoadException {
   String message(AppLocalizations l10n) => switch (this) {
     ConnectionLoadException() => l10n.errorConnection,
     ServerLoadException(statusCode: 503) => l10n.errorRateLimit,
+    BadResponseLoadException() => l10n.errorBadResponse,
     ServerLoadException() || NotFoundLoadException() => l10n.errorServer,
   };
 }

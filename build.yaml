@@ -1,0 +1,9 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          # fromJson проверяет типы и бросает CheckedFromJsonException с именем
+          # поля, а не голый TypeError. Data source превращает её в
+          # BadResponseLoadException.
+          checked: true
