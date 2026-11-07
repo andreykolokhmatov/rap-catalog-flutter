@@ -1,61 +1,21 @@
-# Источники изображений
+# Источники изображений и текстов
 
-Фотографии артистов взяты с [Викисклада](https://commons.wikimedia.org/) и лежат
-локально в `assets/images/artists`: сети в ЛР2 нет,
-и закладываться на неё нельзя. Размер каждого снимка уменьшен до 400px по ширине.
+## Фото исполнителей
 
-Лицензии свободные, но большинство требует указания автора — поэтому этот файл.
-Полные условия и оригиналы — на странице файла на Викискладе.
+Своих снимков в проекте нет: с ЛР3 фото приходит из сети у всех исполнителей
+одинаково. Это фото из Викиданных (свойство P18 у элемента с MBID исполнителя, P434),
+оно грузится миниатюрой 330px прямо с `upload.wikimedia.org` (Викисклад).
 
-Снимок есть у всех записей каталога. Запасной вариант в коде тем не менее
-сохранён: `ImageSources.artistPhoto()` возвращает `null`, и плитка рисуется буквой на
-градиенте — иначе добавление артиста без свободного фото ломало бы сетку.
+Лицензии у этих снимков свободные, но большинство требует указания автора. Автор и
+лицензия каждого снимка указаны на странице файла на Викискладе, ссылку на неё даёт
+сам адрес картинки. Если в Викиданных фото нет, рисуется буквенная плитка на
+градиенте цветов жанров.
 
-## Фото из сети (ЛР3)
+В ЛР2 сети не было, поэтому 33 снимка лежали в `assets/images/artists` с таблицей
+авторов в этом файле. В ЛР3 они убраны: иначе у этих 33 исполнителей фото бралось бы
+из другого источника, чем у остальных.
 
-С ЛР3 каталог — все исполнители MusicBrainz с тегами hip hop и rap, а не 33 записи.
-Для них фото берётся из Викиданных (свойство P18 у элемента с MBID исполнителя, P434)
-и грузится миниатюрой 330px прямо с `upload.wikimedia.org`. Автор и лицензия каждого
-такого снимка указаны на странице файла на Викискладе. Локальные снимки ниже по-прежнему
-в приоритете. Если в Викиданных фото нет, рисуется буквенная плитка.
-
-## Локальные снимки
-
-| Артист | Файл в проекте | Автор | Лицензия |
-|---|---|---|---|
-| 21 Savage | [`artist_a_21_savage.jpg`](https://commons.wikimedia.org/wiki/File:21_Savage_2018.jpg) | Ralph Arvesen from Round Mountain, Texas | CC BY 2.0 |
-| 2Pac | [`artist_a_2pac.png`](https://commons.wikimedia.org/wiki/File:Tupac_Shakur_driver's_license_photo_(1996)_(cropped).png) | State of California DMV | Public domain |
-| 50 Cent | [`artist_a_50_cent.jpg`](https://commons.wikimedia.org/wiki/File:Curtis_"50_Cent"_Jackson_visits_Barksdale_AFB_(5)_(cropped).jpg) | Senior Airman Nia Jacobs | Public domain |
-| A Tribe Called Quest | [`artist_a_tribe_called_quest.jpg`](https://commons.wikimedia.org/wiki/File:Tribe_2009.jpg) | Chalice L. | CC BY-SA 2.0 |
-| Beastie Boys | [`artist_beastie_boys.jpg`](https://commons.wikimedia.org/wiki/File:Beastie_Boys_2009_(6184423405).jpg) | Maddy Julien | CC BY-SA 2.0 |
-| Busta Rhymes | [`artist_busta_rhymes.jpg`](https://commons.wikimedia.org/wiki/File:Busta_Rhymes_(52380599657)_(cropped).jpg) | All-Pro Reels | CC BY-SA 2.0 |
-| Cypress Hill | [`artist_cypress_hill.jpg`](https://commons.wikimedia.org/wiki/File:Cypress_Hill.jpg) | Philgarlic | CC BY-SA 2.0 |
-| De La Soul | [`artist_de_la_soul.jpg`](https://commons.wikimedia.org/wiki/File:De_La_Soul_by_foto_di_matti.jpg) | Matti Hillig | CC BY-SA 3.0 |
-| Drake | [`artist_drake.jpg`](https://commons.wikimedia.org/wiki/File:Drake_July_2016.jpg) | The Come Up Show | CC BY 2.0 |
-| Eminem | [`artist_eminem.jpg`](https://commons.wikimedia.org/wiki/File:Eminem_2021_Color_Corrected.jpg) | Brendan_linden | CC0 |
-| Future | [`artist_future.jpg`](https://commons.wikimedia.org/wiki/File:Future_-_Openair_Frauenfeld_2019_05.jpg) | Frank Schwichtenberg | CC BY-SA 4.0 |
-| Gucci Mane | [`artist_gucci_mane.jpg`](https://commons.wikimedia.org/wiki/File:Gucci_Mane,_Clout_Festival_2024_03_(cropped).jpg) | Wojciech Pędzich | CC BY 4.0 |
-| Ice Cube | [`artist_ice_cube.jpg`](https://commons.wikimedia.org/wiki/File:Ice-Cube_2014-01-09-Chicago-photoby-Adam-Bielawski.jpg) | Adam Bielawski | CC BY-SA 3.0 |
-| J. Cole | [`artist_j_cole.jpg`](https://commons.wikimedia.org/wiki/File:HOTSPOTATL_-_21_Savage_&_J.Cole_Light_Birthday_Bash_ATL_2023_On_FIRE_(xu6HKf40MX0_-_2m38s)_(cropped).jpg) | HOTSPOTATL | CC BY 3.0 |
-| Juice WRLD | [`artist_juice_wrld.png`](https://commons.wikimedia.org/wiki/File:Juice_Wrld_VMAs.png) | MTV International | CC BY 3.0 |
-| Ken Carson | [`artist_ken_carson.jpg`](https://commons.wikimedia.org/wiki/File:Ken_Carson_live_on_Chaos_Tour_at_Milwaukee_2024_(cropped).jpg) | dylanisswagger | CC BY 3.0 |
-| Kendrick Lamar | [`artist_kendrick_lamar.jpg`](https://commons.wikimedia.org/wiki/File:Pulitzer2018-portraits-kendrick-lamar.jpg) | Fuzheado | CC BY-SA 4.0 |
-| Lil Uzi Vert | [`artist_lil_uzi_vert.png`](https://commons.wikimedia.org/wiki/File:Lil_Uzi_Vert_(2018).png) | Icebox | CC BY 3.0 |
-| Lil Wayne | [`artist_lil_wayne.jpg`](https://commons.wikimedia.org/wiki/File:Lil_Wayne_Feb._2020.jpg) | Chris Allmeid | CC BY-SA 4.0 |
-| Madlib | [`artist_madlib.jpg`](https://commons.wikimedia.org/wiki/File:MadlibMarch2014Echo_(cropped).jpg) | Carl Pocket | CC BY-SA 2.0 |
-| MF DOOM | [`artist_mf_doom.jpg`](https://commons.wikimedia.org/wiki/File:MF_Doom_-_Hultsfred_2011_(cropped).jpg) | Possan | CC BY-SA 3.0 |
-| Nas | [`artist_nas.jpg`](https://commons.wikimedia.org/wiki/File:Nas_(52381849239)_(cropped).jpg) | All-Pro Reels | CC BY-SA 2.0 |
-| OutKast | [`artist_outkast.jpg`](https://commons.wikimedia.org/wiki/File:2014227235242_2014-08-15_Rock'n'Heim_-_Sven_-_5D_MK_II_-_250_-_IMG_0063_mod.jpg) | Sven Mandel | CC BY-SA 3.0 |
-| Playboi Carti | [`artist_playboi_carti.jpg`](https://commons.wikimedia.org/wiki/File:Playboi_Carti,_Clout_Festival_2024_05_(cropped).jpg) | Wojciech Pędzich | CC BY 4.0 |
-| Public Enemy | [`artist_public_enemy.jpg`](https://commons.wikimedia.org/wiki/File:Public_Enemy-01-mika.jpg) | MikaV | CC BY-SA 3.0 |
-| Rae Sremmurd | [`artist_rae_sremmurd.jpg`](https://commons.wikimedia.org/wiki/File:Rae_Sremmurd.jpg) | The Come Up Show | CC BY 2.0 |
-| Run‐D.M.C. | [`artist_run_d_m_c.png`](https://commons.wikimedia.org/wiki/File:Run_DMC_(cropped).png) | Jeff Pinilla | CC BY 3.0 |
-| Snoop Dogg | [`artist_snoop_dogg.jpg`](https://commons.wikimedia.org/wiki/File:Snoop_Dogg_2023_(53775197331)_(cropped)_(cropped).jpg) | Bruce Baker from Sydney, Australia | CC BY 2.0 |
-| Travis Scott | [`artist_travis_scott.jpg`](https://commons.wikimedia.org/wiki/File:TravisScott-byPhilipRomano.jpg) | PhilipRomano | CC BY-SA 4.0 |
-| Trippie Redd | [`artist_trippie_redd.png`](https://commons.wikimedia.org/wiki/File:Trippie_Redd_2023.png) | MILLION DOLLAZ WORTH OF GAME | CC BY 3.0 |
-| Wu-Tang Clan | [`artist_wu_tang_clan.jpg`](https://commons.wikimedia.org/wiki/File:Wu_Tang_Clan_on_Stage.jpg) | Napalm filled tires | CC BY-SA 2.0 |
-| XXXTENTACION | [`artist_xxxtentacion.jpg`](https://commons.wikimedia.org/wiki/File:Xxxtentacion_(cropped).jpg) | State of Florida | Public domain |
-| Ye | [`artist_ye.jpg`](https://commons.wikimedia.org/wiki/File:Kanye_West_at_the_2009_Tribeca_Film_Festival_(crop_2).jpg) | David Shankbone | Public domain |
+## Данные каталога
 
 Данные каталога — имена, страны, даты, теги, дискографии — из
 [MusicBrainz](https://musicbrainz.org/), лицензия базы CC0.

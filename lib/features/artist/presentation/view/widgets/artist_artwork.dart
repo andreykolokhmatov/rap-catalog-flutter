@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../common/theme/app_colors.dart';
-import '../../../../../common/theme/image_sources.dart';
 import '../../../domain/artist_model.dart';
 import '../../utils/artist_model_x.dart';
 
-/// Снимок исполнителя: из ассетов, иначе из сети (Викисклад), иначе первая буква
-/// на градиенте цветов жанров.
+/// Снимок исполнителя из сети (Викисклад по фото из Викиданных), иначе первая
+/// буква на градиенте цветов жанров.
 class ArtistArtwork extends StatelessWidget {
   const ArtistArtwork({
     super.key,
@@ -19,18 +18,12 @@ class ArtistArtwork extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Свой снимок из ассетов (с указанием автора) важнее снимка из сети.
-    final asset = ImageSources.artistPhoto(artist.id);
+    final url = artist.photoUrl;
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
-      child: switch ((asset, artist.photoUrl)) {
-        (final String path, _) => Image.asset(
-          path,
-          fit: BoxFit.cover,
-          semanticLabel: artist.name,
-          errorBuilder: (context, error, stackTrace) => _Fallback(artist),
-        ),
-        (null, final url) when url.isNotEmpty => Image.network(
+      child: switch (url) {
+        '' => _Fallback(artist),
+        _ => Image.network(
           url,
           fit: BoxFit.cover,
           semanticLabel: artist.name,
@@ -39,7 +32,6 @@ class ArtistArtwork extends StatelessWidget {
               frame == null ? _Fallback(artist) : child,
           errorBuilder: (context, error, stackTrace) => _Fallback(artist),
         ),
-        _ => _Fallback(artist),
       },
     );
   }
