@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Запросы к MusicBrainz, Викиданным и Википедии. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="Rap Catalog"
         android:name="${applicationName}"
